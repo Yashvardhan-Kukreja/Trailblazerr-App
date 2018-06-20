@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#EEEEEE</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="apple_green">#5ec933</color>
+    <color name="apple_green_light">#71f13d</color>
+
+</resources>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".Activities.MainActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="110dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="T R A C K     Y O U R"
+                    android:textColor="#545454"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/lato_thin"
+                    android:textAlignment="center"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="D  A  I  M  O  K  U"
+                    android:textColor="#2b2b2b"
+                    android:fontFamily="@font/lato_bold"
+                    android:textAlignment="center"
+                    android:textSize="28sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="100dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="You've done "
+                        android:textSize="17sp"
+                        android:fontFamily="@font/lato_regular"
+                        android:textColor="#545454"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 minutes"
+                        android:fontFamily="@font/lato_black"
+                        android:id="@+id/today_duration"
+                        android:textSize="17sp"
+                        android:textColor="#2c2c2c"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="of Daimoku today"
+                    android:layout_marginTop="4dp"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:textColor="#545454"/>
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/like_symbol"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="60dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/heart_symbol"
+                        android:paddingTop="3dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="7dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Yesterday, you did  "
+                        android:textSize="15sp"
+                        android:fontFamily="@font/lato_regular"
+                        android:textColor="#545454"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 minutes of Daimoku"
+                        android:textSize="15sp"
+                        android:id="@+id/yesterday_duration"
+                        android:fontFamily="@font/font_lato_black"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/begin_daimoku_button"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/ripple_bg">
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center|left"
+                android:src="@drawable/play_symbol"
+                android:layout_marginLeft="60dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Begin Daimoku"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/lato_black"
+                    android:textSize="25sp"/>
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+
+</RelativeLayout>
