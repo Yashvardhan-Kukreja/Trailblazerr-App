@@ -2,6 +2,7 @@ package com.yash1300.trailblazerr.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
@@ -14,13 +15,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getkeepsafe.taptargetview.TapTarget;
+import com.getkeepsafe.taptargetview.TapTargetView;
+import com.yash1300.trailblazerr.Models.DaimokuSession;
 import com.yash1300.trailblazerr.R;
+import com.yash1300.trailblazerr.Utils.RealmController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.internal.Context;
 
 public class BeginSessionActivity extends AppCompatActivity {
 
@@ -51,10 +59,65 @@ public class BeginSessionActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mediaPlayer.stop();
+        saveDataInDB();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_begin_session);
         ButterKnife.bind(this);
+
+        SharedPreferences preferences = getSharedPreferences("mainCache", MODE_PRIVATE);
+        Boolean firstTime = preferences.getBoolean("firstTime", true);
+
+        if (firstTime) {
+            TapTargetView.showFor(BeginSessionActivity.this,
+                    TapTarget.forView(homeButton, "Save the chant-history and Back to home page!", "After you're done chanting, press this to go back to home screen and add the current duration of chanting to history")
+                            .outerCircleColor(R.color.apple_green)
+                            .outerCircleAlpha(0.9f)
+                            .transparentTarget(true), new TapTargetView.Listener() {
+                        @Override
+                        public void onTargetDismissed(TapTargetView view, boolean userInitiated) {
+                            super.onTargetDismissed(view, userInitiated);
+                            TapTargetView.showFor(BeginSessionActivity.this,
+                                    TapTarget.forView(start, "To start/resume chanting!")
+                                            .outerCircleColor(R.color.apple_green)
+                                            .outerCircleAlpha(0.9f)
+                                            .transparentTarget(true), new TapTargetView.Listener() {
+
+                                        @Override
+                                        public void onTargetDismissed(TapTargetView view, boolean userInitiated) {
+                                            super.onTargetDismissed(view, userInitiated);
+                                            TapTargetView.showFor(BeginSessionActivity.this,
+                                                    TapTarget.forView(pause, "To pause chanting!")
+                                                            .outerCircleColor(R.color.apple_green)
+                                                            .outerCircleAlpha(0.9f)
+                                                            .transparentTarget(true));
+                                        }
+                                    });
+                        }
+                    });
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("firstTime", false);
+            editor.apply();
+        }
+/*
+        if (firstTime.equals("") || firstTime.equals(null)) {
+
+            TapTarget.forView(homeButton, "Save the chant-history and Back to home page !", "After you're done chanting, press this to go back to home screen and add the current duration of chanting to history")
+                    .outerCircleColor(R.color.apple_green)
+                    .outerCircleAlpha(0.9f)
+                    .transparentTarget(true);
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("firstTime", "Nope");
+            editor.commit();
+        }*/
+
 
         mediaPlayer = MediaPlayer.create(this, R.raw.chant);
         foreverHandler = new Handler();
@@ -120,6 +183,7 @@ public class BeginSessionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mediaPlayer.stop();
+                saveDataInDB();
                 startActivity(new Intent(BeginSessionActivity.this, MainActivity.class));
             }
         });
@@ -179,5 +243,14 @@ public class BeginSessionActivity extends AppCompatActivity {
             minutes.setText(String.format(" %02d ", ((2*secs)-foreverSecs-totalPauseDuration)/60));
             hours.setText(String.format("%02d", ((2*secs)-foreverSecs-totalPauseDuration)/3600));
         }
+    }
+
+    private void saveDataInDB() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String date = simpleDateFormat.format(new Date());
+        int duration = Integer.parseInt(seconds.getText().toString().trim())
+                + (Integer.parseInt(minutes.getText().toString().trim())*60)
+                + (Integer.parseInt(hours.getText().toString().trim())*3600);
+        RealmController.getInstance().addOrUpdateASession(date, Long.valueOf(duration));
     }
 }
