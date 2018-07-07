@@ -17,18 +17,14 @@ import android.widget.Toast;
 
 import com.getkeepsafe.taptargetview.TapTarget;
 import com.getkeepsafe.taptargetview.TapTargetView;
-import com.yash1300.trailblazerr.Models.DaimokuSession;
 import com.yash1300.trailblazerr.R;
 import com.yash1300.trailblazerr.Utils.RealmController;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.internal.Context;
 
 public class BeginSessionActivity extends AppCompatActivity {
 
@@ -105,19 +101,6 @@ public class BeginSessionActivity extends AppCompatActivity {
             editor.putBoolean("firstTime", false);
             editor.apply();
         }
-/*
-        if (firstTime.equals("") || firstTime.equals(null)) {
-
-            TapTarget.forView(homeButton, "Save the chant-history and Back to home page !", "After you're done chanting, press this to go back to home screen and add the current duration of chanting to history")
-                    .outerCircleColor(R.color.apple_green)
-                    .outerCircleAlpha(0.9f)
-                    .transparentTarget(true);
-
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("firstTime", "Nope");
-            editor.commit();
-        }*/
-
 
         mediaPlayer = MediaPlayer.create(this, R.raw.chant);
         foreverHandler = new Handler();
