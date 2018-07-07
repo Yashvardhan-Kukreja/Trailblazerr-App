@@ -1,37 +1,40 @@
 package com.yash1300.trailblazerr.Models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class DaimokuSession {
+public class DaimokuSession extends RealmObject {
 
-    private Date date;
+    @PrimaryKey
+    private String date;
 
-    private List<Time> times;
+    private long duration_in_secs;
 
     public DaimokuSession() {
     }
 
-    public DaimokuSession(Date date, List<Time> times) {
+    public DaimokuSession(String date, long duration_in_secs) {
         this.date = date;
-        this.times = times;
+        this.duration_in_secs = duration_in_secs;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public List<Time> getTimes() {
-        return times;
-    }
-
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public void setTimes(List<Time> times) {
-        this.times = times;
+    public long getDuration_in_secs() {
+        return duration_in_secs;
+    }
+
+    public void setDuration_in_secs(long duration_in_secs) {
+        this.duration_in_secs = duration_in_secs;
     }
 }
