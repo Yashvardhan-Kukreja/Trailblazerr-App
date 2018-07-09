@@ -35,14 +35,21 @@ public class RealmController {
         return realm.allObjects(DaimokuSession.class).isEmpty();
     }
 
+    public DaimokuSession findSessionByDateNullable(String date) {
+        return realm.where(DaimokuSession.class).equalTo("date", date).findFirst();
+    }
+
     public DaimokuSession findSessionByDate(String date) {
+        if (realm.where(DaimokuSession.class).equalTo("date", date).findFirst() == null) {
+            return new DaimokuSession(date, 0);
+        }
         return realm.where(DaimokuSession.class).equalTo("date", date).findFirst();
     }
 
     public void addOrUpdateASession(String date, long secs) {
         RealmResults<DaimokuSession> results = this.getHistory();
         long todaySecs = 0;
-        if (this.findSessionByDate(date) != null) {
+        if (this.findSessionByDateNullable(date) != null) {
             todaySecs = results.get(results.size()-1).getDuration_in_secs();
         }
         realm.beginTransaction();
@@ -52,10 +59,14 @@ public class RealmController {
 
     public DaimokuSession yesterdaySession(String todayDate) {
         RealmResults<DaimokuSession> results = this.getHistory();
-        if (this.findSessionByDate(todayDate) != null) {
+        if (todayDate.equals(this.getHistory().first().getDate())) {
+            return new DaimokuSession("No date", 0);
+        }
+        if (this.findSessionByDateNullable(todayDate) != null) {
             return results.get(results.size()-2);
         }
         return results.get(results.size()-1);
+
     }
 
 }
