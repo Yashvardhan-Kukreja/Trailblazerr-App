@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,8 +32,10 @@ public class BeginSessionActivity extends AppCompatActivity {
     @BindView(R.id.chronometer_secs) TextView seconds;
     @BindView(R.id.chronometer_mins) TextView minutes;
     @BindView(R.id.chronometer_hours) TextView hours;
-    @BindView(R.id.start_btn) ImageView start;
-    @BindView(R.id.pause_btn) ImageView pause;
+    @BindView(R.id.start_btn) LinearLayout start;
+    @BindView(R.id.pause_btn) LinearLayout pause;
+    @BindView(R.id.start_img) ImageView startImg;
+    @BindView(R.id.pause_img) ImageView pauseImg;
     @BindView(R.id.start_btn_text) TextView startText;
     @BindView(R.id.pause_btn_text) TextView pauseText;
     @BindView(R.id.speaker_symbol) ImageView speaker;
@@ -183,8 +186,8 @@ public class BeginSessionActivity extends AppCompatActivity {
             subtitle.setTextColor(Color.parseColor("#838383"));
             playFirstTime.setBackgroundColor(Color.parseColor("#D9D9D9"));
             play2beginTxt.setText("Now Chanting...");
-            start.setColorFilter(getResources().getColor(R.color.apple_green), PorterDuff.Mode.SRC_ATOP);
-            pause.setColorFilter(Color.parseColor("#757575"), PorterDuff.Mode.SRC_ATOP);
+            startImg.setColorFilter(getResources().getColor(R.color.apple_green), PorterDuff.Mode.SRC_ATOP);
+            pauseImg.setColorFilter(Color.parseColor("#757575"), PorterDuff.Mode.SRC_ATOP);
             speaker.setColorFilter(Color.parseColor("#3E3E3E"), PorterDuff.Mode.SRC_ATOP);
             if (firstTime) {
                 firstTime = false;
@@ -214,8 +217,8 @@ public class BeginSessionActivity extends AppCompatActivity {
             subtitle.setTextColor(Color.parseColor("#88838383"));
             playFirstTime.setBackgroundColor(getResources().getColor(R.color.apple_green));
             play2beginTxt.setText("Resume Chanting");
-            start.setColorFilter(Color.parseColor("#757575"), PorterDuff.Mode.SRC_ATOP);
-            pause.setColorFilter(getResources().getColor(R.color.apple_green), PorterDuff.Mode.SRC_ATOP);
+            startImg.setColorFilter(Color.parseColor("#757575"), PorterDuff.Mode.SRC_ATOP);
+            pauseImg.setColorFilter(getResources().getColor(R.color.apple_green), PorterDuff.Mode.SRC_ATOP);
             speaker.setColorFilter(Color.parseColor("#9E9E9E"), PorterDuff.Mode.SRC_ATOP);
         }
     }

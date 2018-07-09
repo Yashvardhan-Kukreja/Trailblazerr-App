@@ -164,7 +164,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginRight="75dp">
+            android:layout_marginRight="75dp"
+            android:id="@+id/start_btn">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -182,9 +183,9 @@
                 android:layout_height="30dp"
                 android:paddingLeft="5dp"
                 android:layout_gravity="center"
+                android:id="@+id/start_img"
                 android:src="@drawable/play_symbol"
-                android:tint="#757575"
-                android:id="@+id/start_btn"/>
+                android:tint="#757575"/>
 
         </LinearLayout>
 
@@ -192,7 +193,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="75dp">
+            android:layout_marginLeft="75dp"
+            android:id="@+id/pause_btn">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -211,8 +213,8 @@
                 android:paddingLeft="5dp"
                 android:layout_gravity="center"
                 android:src="@drawable/pause_symbol"
-                android:tint="#757575"
-                android:id="@+id/pause_btn"/>
+                android:id="@+id/pause_img"
+                android:tint="#757575"/>
 
         </LinearLayout>
 
