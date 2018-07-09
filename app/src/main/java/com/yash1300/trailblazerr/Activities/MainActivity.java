@@ -40,17 +40,17 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         Realm.setDefaultConfiguration(realmConfiguration);
 
-        System.out.println(RealmController.getInstance().getHistory());
-
-        long todayDuration = 0, yesterdayDuration= 0;
+        long todayDuration=0, yesterdayDuration=0;
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String todayDate = simpleDateFormat.format(new Date());
 
         RealmResults<DaimokuSession> history = RealmController.getInstance().getHistory();
-        if (history.size() == 1) {
-            todayDuration = RealmController.getInstance().findSessionByDate(todayDate).getDuration_in_secs();
-        } else if (history.size() > 1) {
+        Toast.makeText(this, history.toString(), Toast.LENGTH_SHORT).show();
+        System.out.println(history.toString());
+        System.out.println(todayDate.toString());
+
+        if (history.size() >= 1) {
             todayDuration = RealmController.getInstance().findSessionByDate(todayDate).getDuration_in_secs();
             yesterdayDuration = RealmController.getInstance().yesterdaySession(todayDate).getDuration_in_secs();
         }
