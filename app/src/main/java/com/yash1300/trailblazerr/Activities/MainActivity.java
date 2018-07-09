@@ -1,6 +1,7 @@
 package com.yash1300.trailblazerr.Activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,17 +47,17 @@ public class MainActivity extends AppCompatActivity {
         String todayDate = simpleDateFormat.format(new Date());
 
         RealmResults<DaimokuSession> history = RealmController.getInstance().getHistory();
-        Toast.makeText(this, history.toString(), Toast.LENGTH_SHORT).show();
-        System.out.println(history.toString());
-        System.out.println(todayDate.toString());
 
         if (history.size() >= 1) {
             todayDuration = RealmController.getInstance().findSessionByDate(todayDate).getDuration_in_secs();
             yesterdayDuration = RealmController.getInstance().yesterdaySession(todayDate).getDuration_in_secs();
         }
 
-        todayDurationView.setText(Long.toString(todayDuration) + " seconds");
-        yesterdayDurationView.setText(Long.toString(yesterdayDuration) + " seconds");
+        String finalTodayString = finalMinutesOrSecondsString(todayDuration);
+        String finalYesterdayString = finalMinutesOrSecondsString(yesterdayDuration);
+
+        todayDurationView.setText(finalTodayString);
+        yesterdayDurationView.setText(finalYesterdayString);
 
         beginDaimoku.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,5 +66,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @NonNull
+    private String finalMinutesOrSecondsString(Long seconds) {
+        if (seconds >= 60) {
+            long minutes = seconds/60;
+            long remainingSecs = seconds%60;
+            String secondPartMin = "minutes", secondPartSec = "seconds";
+            if (minutes == 1) {
+                secondPartMin = "minute";
+            }
+            if (remainingSecs == 1) {
+                secondPartSec = "second";
+            }
+            if (remainingSecs == 0) {
+                return (Long.toString(minutes) + secondPartMin);
+            }
+            return (String.format("%d %s, %d %s", minutes, secondPartMin, remainingSecs, secondPartSec));
+        }
+        return (Long.toString(seconds) + " seconds");
     }
 }
