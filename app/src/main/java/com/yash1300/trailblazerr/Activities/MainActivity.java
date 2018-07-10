@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 secondPartSec = "second";
             }
             if (remainingSecs == 0) {
-                return (Long.toString(minutes) + secondPartMin);
+                return (Long.toString(minutes) + " " + secondPartMin);
             }
             return (String.format("%d %s, %d %s", minutes, secondPartMin, remainingSecs, secondPartSec));
         }
